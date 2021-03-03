@@ -30,10 +30,12 @@ swagger_blueprint =get_swaggerui_blueprint(
 #  -------------------------------------------------------------------
 app = Flask(__name__)
 app.register_blueprint(swagger_blueprint)
+import os #esta libreria sirve para usar las variables de entorno de la maquina como HEROKU (seguridad)
+
 # ------------------------------------------------
 # para concetarse a la base de datos desde una ORM
 #                                                               formato://username:password@host:port/database
-app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:@localhost:3306/flasklibreria'
+app.config['SQLALCHEMY_DATABASE_URI']= os.environ['JAWSDB_URL']
 #print(app.config)
 # ---------------------------- esto es del api restful -------------------------------
 api = Api(app)
